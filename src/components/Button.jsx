@@ -42,6 +42,9 @@ const StyledButton = styled.button`
     opacity: 0.6;
     cursor: not-allowed;
   }
+  @media (max-width: 768px) {
+    font-size: 0.875rem;
+  }
 `
 
 const Button = ({ children, ...props }) => {

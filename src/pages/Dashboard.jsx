@@ -24,6 +24,11 @@ const DashboardHeader = styled.div`
   h1 {
     font-size: 2rem;
     color: ${({ theme }) => theme.colors.text};
+  } 
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 1.5rem;
+    }
   }
 `
 
