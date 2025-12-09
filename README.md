@@ -14,7 +14,7 @@ A modern, responsive single-page application (SPA) built with React for managing
 - **json-server** - Mock REST API server
 - **Vitest** - Testing framework
 
-## Design Notes (concise)
+## Design Notes 
 - **State management:** Context + reducer for tasks keeps async states (loading/error) centralized; chosen for small app footprint over Redux complexity.
 - **Data shape:** Tasks carry `dueDate`, `status`, `priority`, timestamps; filtering/sorting happens client-side for responsiveness.
 - **Styling:** Styled Components with a theme for consistent spacing, colors, and easy theming; avoids global CSS conflicts.
