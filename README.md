@@ -14,6 +14,14 @@ A modern, responsive single-page application (SPA) built with React for managing
 - **json-server** - Mock REST API server
 - **Vitest** - Testing framework
 
+## Design Notes (concise)
+- **State management:** Context + reducer for tasks keeps async states (loading/error) centralized; chosen for small app footprint over Redux complexity.
+- **Data shape:** Tasks carry `dueDate`, `status`, `priority`, timestamps; filtering/sorting happens client-side for responsiveness.
+- **Styling:** Styled Components with a theme for consistent spacing, colors, and easy theming; avoids global CSS conflicts.
+- **Routing:** React Router for dashboard/detail views without full-page reloads.
+- **API layer:** Axios instance in `taskService` isolates HTTP concerns; easy swap of base URL or headers later.
+- **Trade-offs:** Client-only filtering/sorting scales fine for moderate lists; server-side pagination/sorting would be needed for large datasets. Context is simpler here but would be replaced by RTK Query or SWR if data fetching grew.
+
 ## Getting Started
 
 ### Prerequisites
@@ -78,6 +86,7 @@ The mock API server provides the following endpoints:
   "customerName": "Customer Name",
   "status": "pending" | "in-progress" | "completed",
   "priority": "low" | "medium" | "high",
+   "dueDate": "2025-01-12T00:00:00.000Z",
   "createdAt": "2024-01-15T10:30:00.000Z",
   "updatedAt": "2024-01-15T10:30:00.000Z"
 }
