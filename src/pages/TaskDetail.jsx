@@ -8,6 +8,7 @@ import ErrorMessage from '../components/ErrorMessage'
 import Modal from '../components/Modal'
 import TaskForm from '../components/TaskForm'
 import { taskService } from '../services/taskService'
+import { DeleteModal } from '../components/DeleteModal'
 
 const DetailContainer = styled.div`
   max-width: 800px;
@@ -103,6 +104,8 @@ const TaskDetail = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+
 
   useEffect(() => {
     const fetchTask = async () => {
@@ -189,7 +192,7 @@ const TaskDetail = () => {
           <Button onClick={() => setIsEditModalOpen(true)} primary>
             Edit Task
           </Button>
-          <Button onClick={handleDelete} danger>
+          <Button onClick={() => setIsDeleteModalOpen(true)} danger>
             Delete Task
           </Button>
           <Button onClick={() => navigate('/')}>Back to Dashboard</Button>
@@ -205,6 +208,9 @@ const TaskDetail = () => {
             taskService.getTaskById(id).then(setTask)
           }}
         />
+      </Modal>
+      <Modal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)}>
+        <DeleteModal task={task} onClose={() => setIsDeleteModalOpen(false)} />
       </Modal>
     </DetailContainer>
   )

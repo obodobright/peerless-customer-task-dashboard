@@ -5,6 +5,7 @@ import { useTasks } from '../context/TaskContext'
 import Button from './Button'
 import Modal from './Modal'
 import TaskForm from './TaskForm'
+import { DeleteModal } from './DeleteModal'
 
 const Card = styled.div`
   background-color: ${({ theme }) => theme.colors.surface};
@@ -94,6 +95,8 @@ const TaskDescription = styled.p`
   overflow: hidden;
 `
 
+
+
 const TaskMeta = styled.div`
   display: flex;
   justify-content: space-between;
@@ -115,14 +118,8 @@ const CardActions = styled.div`
 `
 
 const TaskCard = ({ task }) => {
-  const { deleteTask } = useTasks()
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
-
-  const handleDelete = async () => {
-    if (window.confirm('Are you sure you want to delete this task?')) {
-      await deleteTask(task.id)
-    }
-  }
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
 
   return (
     <>
@@ -146,7 +143,7 @@ const TaskCard = ({ task }) => {
           <Button onClick={() => setIsEditModalOpen(true)} small>
             Edit
           </Button>
-          <Button onClick={handleDelete} small danger>
+          <Button onClick={() => setIsDeleteModalOpen(true)} small danger>
             Delete
           </Button>
         </CardActions>
@@ -154,6 +151,10 @@ const TaskCard = ({ task }) => {
 
       <Modal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)}>
         <TaskForm task={task} onClose={() => setIsEditModalOpen(false)} />
+      </Modal>
+
+      <Modal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)}>
+        <DeleteModal task={task} onClose={() => setIsDeleteModalOpen(false)} />
       </Modal>
     </>
   )

@@ -69,6 +69,10 @@ const CloseButton = styled.button`
   &:hover {
     background-color: ${({ theme }) => theme.colors.background};
   }
+  @media (max-width: 768px) {
+    top: ${({ theme }) => theme.spacing.sm};
+    right: ${({ theme }) => theme.spacing.sm};
+  }
 `
 
 const ModalContentWrapper = styled.div`
